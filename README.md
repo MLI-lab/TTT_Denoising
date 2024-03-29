@@ -12,7 +12,7 @@ pip install requirements.txt
 * scipy==1.9.1
 * torch==1.13.1
 * torchvision==0.14.1
-
+  
 ## Usage Modes
 ### Joint Training
 Distributed data paralleling is adopted here.
@@ -35,7 +35,7 @@ python ttt_mim.py \
 ```
 
 ### Test-Time Adaptation to Single Images
-An example to apply our method on fastMRI with simulated noise on single GPU can be seen below. Test-time adaptation is evalauated on natural and synthetic noise with different noise levels. Test results are obtained by running the method on selected 10 images from each dataset. Test images can be found under 'test_time_training/testset/', and the path to the pretrained model that is adapted during the test-time adaptation is under 'test_time_training/model/'.
+An example to apply our method on fastMRI with simulated noise on single GPU can be seen below. Test-time adaptation is evalauated on natural and synthetic noise with different noise levels. Test results are obtained by running the method on selected 10 images from each dataset. Test images can be found under 'test_time_training/testset/', and the pretrained model that is adapted during the test-time adaptation is 'test_time_training/model/0715_ttt_mim_unet_gn_0.005.pth.tar'. Run 'test_time_training/TTT_MIM_TestTimeTraining.ipynb' for an example of test-time adaptation to single image, and reproduction of the test results. 
 ```
 python ttt_mim_online.py \
 --dataset fastmri --noise-mode gaussian --noise-var 0.005\
@@ -44,3 +44,32 @@ python ttt_mim_online.py \
 --gpu 0\
 [fastMRI dataset folder]
 ```
+## Parameters
+
+### Hyperparameters
+
+* --lr: Learning rate for the gradient updates during the Test-Time Training.
+* --niters: Number of gradient update iterations during the Test-Time Training
+* --mask-ratio: Mask ratio determines the fraction of the masked-off area.
+* --mask-patch-size: Mask patch size determines the size of each square masked patch.
+
+### Options
+
+* --dataset: Selects the dataset among alternatives; 'sidd', 'polyu', 'fmdd', 'ct', 'fastmri', 'imagenet'
+* --noise-mode: Selects the noise mode for simulated noise scenarios. Alternatives are 'gaussian', 'sp', 'poisson'. Not needed for natural noise case.
+* --noise-var: Selects the noise variance for simulated noise. Not needed for natural noise case.
+* --pretrained: Gives the path to the pretrained model that will be used during the Test-Time Training.
+* --ImageNum: Selects the image to be illustrated among the different images in testset. If there are 10 images, it can be set to 1-10. Set to 0 for no illustration.
+* --gpu 0: Selects the single gpu for applying method. Distributed data paralleling is not used in this case.
+* --denoise-loss: Selects the denoising loss. Set 'pd' for the default version of our method.
+
+## Reproduction of the Test Results
+
+The test results can be reproduced by running 'test_time_training/TTT_MIM_TestTimeTraining.ipynb'. The exact parameters to get results in Table 1 are given as,
+
+| | SIDD | PolyU | FMDD | CT | FastMRI | G0.01 | G0.02 | SP | Poisson |
+|----------|:----------:|:----------:|:----------:|:----------:|:----------:|:----------:|:----------:|:----------:|:-----------:|
+| iteration number | 8 | 8 | 8 | 8 | 8 | 8 | 8 | 8 | 8 |
+| learning rate | 1e-4 | 5e-5 | 5e-6 | 1e-5 | 1e-4 | 1e-5 | 5e-5 | 5e-5 | 1e-6 |
+| mask ratio | 0.3 | 0.4 | 0.5 | 0.4 | 0.01 | 0.4 | 0.4 | 0.4 | 0.1 |
+| mask patch size| 14 | 4 | 4 | 4 | 1 | 4 | 4 | 4 | 4 |
