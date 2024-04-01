@@ -1,8 +1,8 @@
 # TTT-MIM: Test-Time Training with Masked Image Modeling for Denoising Distribution Shifts
 
-This repository contains code to illustrate test-time adaptation to single images and reproduce the test results in Table 1 of the paper: TTT-MIM: Test-Time Training with Masked Image Modeling for Denoising Distribution Shifts.
+This repository contains code to illustrate test-time adaptation to single images and reproduce the results of the paper: TTT-MIM: Test-Time Training with Masked Image Modeling for Denoising Distribution Shifts.
 
-## Preperation
+## Preparation
 The code is written in python and heavily depends on Pytorch. It has been developed and tested with following packages which can be installed with: 
 ```
 pip install requirements.txt
@@ -15,7 +15,8 @@ pip install requirements.txt
   
 ## Usage Modes
 ### Joint Training
-Distributed data paralleling is adopted here.
+We provide the pretrained model here
+Alternatively, you can pretrain your own model using distributed data parallel using:
 ```
 python main_joint_train.py \
 --dataset imagenet --noise-mode gaussian --noise-var 0.005 \ 
@@ -23,16 +24,6 @@ python main_joint_train.py \
 [your imagenet-mini folder with train.csv and val.csv]
 ```
 
-### Test-Time Adaptation to Batches of Images
-An example to apply our method on SIDD with distributed data paralleling.
-```
-python ttt_mim.py \
---dataset sidd\
---pretrained [path of pretrained model] \
---nepochs 20 --lr 1e-4 --batch-adapt 20 --mask-ratio 0.3 --mask-patch-size 14\
---gpu 0 --dist-url 'tcp://localhost:10001' --multiprocessing-distributed --world-size 1 --rank 0 \
-[SIDD dataset folder]
-```
 
 ### Test-Time Adaptation to Single Images
 An example to apply our method on fastMRI with simulated noise on single GPU can be seen below. Test-time adaptation is evalauated on natural and synthetic noise with different noise levels. Test results are obtained by running the method on selected 10 images from each dataset. Test images can be found under 'test_time_training/testset/', and the pretrained model that is adapted during the test-time adaptation is 'test_time_training/model/0715_ttt_mim_unet_gn_0.005.pth.tar'. Run 'test_time_training/TTT_MIM_TestTimeTraining.ipynb' for an example of test-time adaptation to single image, and reproduction of the test results. 
@@ -63,7 +54,7 @@ python ttt_mim_online.py \
 * --gpu 0: Selects the single gpu for applying method. Distributed data paralleling is not used in this case.
 * --denoise-loss: Selects the denoising loss. Set 'pd' for the default version of our method.
 
-## Reproduction of the Test Results
+## Reproduction of the results in Table 1
 
 The test results can be reproduced by running 'test_time_training/TTT_MIM_TestTimeTraining.ipynb'. The exact parameters to get results in Table 1 are given as,
 
@@ -73,3 +64,15 @@ The test results can be reproduced by running 'test_time_training/TTT_MIM_TestTi
 | learning rate | 1e-4 | 5e-5 | 5e-6 | 1e-5 | 1e-4 | 1e-5 | 5e-5 | 5e-5 | 1e-6 |
 | mask ratio | 0.3 | 0.4 | 0.5 | 0.4 | 0.01 | 0.4 | 0.4 | 0.4 | 0.1 |
 | mask patch size| 14 | 4 | 4 | 4 | 1 | 4 | 4 | 4 | 4 |
+
+### Test-Time Adaptation to Batches of Images
+This section is for adapting the method to a batch of images instead of a single one.
+Here is an example to apply our method on SIDD with distributed data parallel.
+```
+python ttt_mim.py \
+--dataset sidd\
+--pretrained [path of pretrained model] \
+--nepochs 20 --lr 1e-4 --batch-adapt 20 --mask-ratio 0.3 --mask-patch-size 14\
+--gpu 0 --dist-url 'tcp://localhost:10001' --multiprocessing-distributed --world-size 1 --rank 0 \
+[SIDD dataset folder]
+```
