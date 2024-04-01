@@ -2,7 +2,7 @@
 
 This repository contains code to illustrate test-time adaptation to single images and reproduce the results of the paper: TTT-MIM: Test-Time Training with Masked Image Modeling for Denoising Distribution Shifts.
 
-## Preparation
+## Installation
 The code is written in python and heavily depends on Pytorch. It has been developed and tested with following packages which can be installed with: 
 ```
 pip install requirements.txt
@@ -54,7 +54,7 @@ python ttt_mim_online.py \
 * --gpu 0: Selects the single gpu for applying method. Distributed data paralleling is not used in this case.
 * --denoise-loss: Selects the denoising loss. Set 'pd' for the default version of our method.
 
-## Reproduction of the results in Table 1
+## Reproducing the results in Table 1
 
 The test results can be reproduced by running 'test_time_training/TTT_MIM_TestTimeTraining.ipynb'. The exact parameters to get results in Table 1 are given as,
 
@@ -67,6 +67,7 @@ The test results can be reproduced by running 'test_time_training/TTT_MIM_TestTi
 
 ### Test-Time Adaptation to Batches of Images
 This section is for adapting the method to a batch of images instead of a single one.
+
 Here is an example to apply our method on SIDD with distributed data parallel.
 ```
 python ttt_mim.py \
