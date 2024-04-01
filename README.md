@@ -15,7 +15,7 @@ pip install requirements.txt
   
 ## Usage Modes
 ### Joint Training
-We provide the pretrained model here
+We provide the pretrained model [here](https://github.com/MLI-lab/TTT_Denoising/tree/main/model).
 Alternatively, you can pretrain your own model using distributed data parallel using:
 ```
 python main_joint_train.py \
@@ -26,7 +26,7 @@ python main_joint_train.py \
 
 
 ### Test-Time Adaptation to Single Images
-An example to apply our method on fastMRI with simulated noise on single GPU can be seen below. Test-time adaptation is evalauated on natural and synthetic noise with different noise levels. Test results are obtained by running the method on selected 10 images from each dataset. Test images can be found under 'test_time_training/testset/', and the pretrained model that is adapted during the test-time adaptation is 'test_time_training/model/0715_ttt_mim_unet_gn_0.005.pth.tar'. Run 'test_time_training/TTT_MIM_TestTimeTraining.ipynb' for an example of test-time adaptation to single image, and reproduction of the test results. 
+An example to apply our method on fastMRI with simulated noise on single GPU can be seen below. Test-time adaptation is evalauated on natural and synthetic noise with different noise levels. Test results are obtained by running the method on selected 10 images from each dataset. Test images can be found under 'test_time_training/testset/', and the pretrained model that is adapted during the test-time adaptation is 'test_time_training/model/0715_ttt_mim_unet_gn_0.005.pth.tar'. Run 'test_time_training/TTT_MIM_TestTimeTraining.ipynb' for an example of test-time adaptation to single image, and reproducing the test results. 
 ```
 python ttt_mim_online.py \
 --dataset fastmri --noise-mode gaussian --noise-var 0.005\
