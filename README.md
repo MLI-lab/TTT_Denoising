@@ -57,7 +57,7 @@ Alternatively, you can use the notebook 'TTT_MIM.ipynb', which can be run on Goo
 
 ## Reproducing the results in Table 1
 
-The test results can be reproduced by running 'test_time_training/TTT_MIM_TestTimeTraining.ipynb'. The exact parameters to get results in Table 1 are given as,
+The exact hyperparameters to get results in Table 1 are given as,
 
 | | SIDD | PolyU | FMDD | CT | FastMRI | G0.01 | G0.02 | SP | Poisson |
 |----------|:----------:|:----------:|:----------:|:----------:|:----------:|:----------:|:----------:|:----------:|:-----------:|
