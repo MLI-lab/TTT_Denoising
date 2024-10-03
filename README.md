@@ -26,7 +26,7 @@ python main_joint_train.py \
 
 
 ### Test-Time Adaptation to Single Images
-Test-time adaptation is evalauated on natural and synthetic noise with different noise levels. Test results are obtained by running the method on selected 10 images from each dataset. Test images can be found under 'test_images/', and the pretrained model that is adapted during the test-time adaptation is '/model/0715_ttt_mim_unet_gn_0.005.pth.tar'. Run 'ttt_mim_online.py' for adapting to single images, and reproducing the test results. An example to apply our method on fastMRI with simulated noise on single GPU can be seen below. 
+Test-time adaptation is evaluated on natural and synthetic noise with different noise levels. Test results are obtained by running the method on selected 10 images from each dataset. Test images can be found under 'test_images/', and the pretrained model that is adapted during the test-time adaptation is '/model/0715_ttt_mim_unet_gn_0.005.pth.tar'. Run 'ttt_mim_online.py' for adapting to single images, and reproducing the test results. An example to apply our method on fastMRI with simulated noise on single GPU can be seen below. 
 ```
 python ttt_mim_online.py \
 --dataset fastmri --noise-mode gaussian --noise-var 0.005\
