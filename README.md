@@ -78,3 +78,14 @@ python ttt_mim.py \
 --gpu 0 --dist-url 'tcp://localhost:10001' --multiprocessing-distributed --world-size 1 --rank 0 \
 [SIDD dataset folder]
 ```
+
+## Citation
+
+```bibtex
+@InProceedings{TTT_Image_Denoising,
+  author = {Mansour, Youssef and Zhong, Xuyang and Caglar, Serdar and Heckel, Reinhard,
+  title = {TTT-MIM: Test-Time Training with Masked Image Modeling for Denoising Distribution Shifts},
+  year = {2025},
+  booktitle = {European Conference on Computer Vision 2024 (ECCV)}
+}
+```
